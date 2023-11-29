@@ -1,38 +1,39 @@
 ﻿#include <iostream>
-#include <limits>
 
-const int MAX_ROWS = 100;
-const int MAX_COLS = 100;
+const int MAX_SIZE = 100;
 
 int main() {
     setlocale(0, ".1251");
-    int matrix[MAX_ROWS][MAX_COLS];
-    int rows, cols;
+    int matrix[MAX_SIZE][MAX_SIZE];
+    int size;
 
-    std::cout << "Введіть кількість рядків: ";
-    std::cin >> rows;
-    std::cout << "Введіть кількість стовпців: ";
-    std::cin >> cols;
 
-    std::cout << "Введіть елементи матриці:\n";
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
+    std::cout << "Введіть розмір квадратної матриці: ";
+    std::cin >> size;
+
+    std::cout << "Введіть елементи матриці: " << std::endl;
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
             std::cout << "Елемент [" << i + 1 << "][" << j + 1 << "]: ";
             std::cin >> matrix[i][j];
         }
     }
-    for (int i = 0; i < rows; ++i) {
-        int minElement = std::numeric_limits<int>::max();
-        int minIndex = -1;
 
-        for (int j = 0; j < cols; ++j) {
-            if (matrix[i][j] < minElement) {
-                minElement = matrix[i][j];
-                minIndex = j;
-            }
+
+    int product = 1;
+    for (int i = 0; i < size; ++i) {
+        if (matrix[i][i] > 0) {
+            product *= matrix[i][i];
         }
+    }
 
-        std::cout << "Мінімальний елемент у рядку " << i + 1 << " має значення " << minElement << " та знаходиться в стовпці " << minIndex + 1 << ".\n";
+
+    if (product != 1) {
+        std::cout << "Добуток додатних елементів на головній діагоналі: " << product << std::endl;
+    }
+    else {
+        std::cout << "На головній діагоналі немає додатних елементів або матриця не є квадратною." << std::endl;
     }
 
     return 0;
+}
